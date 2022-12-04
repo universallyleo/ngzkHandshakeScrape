@@ -13,8 +13,7 @@ if scrappage.status_code != 200:
 fromfile = str("./31st.json")
 fromdata = json.load(iopen(fromfile, encoding="utf-8"))
 
-date = str(sys.argv[1])
-tofile = str(f".src/data_{date}.json")
+tofile = str(sys.argv[1])
 todata = json.load(iopen(tofile, encoding="utf-8"))
 todata.append(fromdata)
 
