@@ -1,0 +1,42 @@
+name: On Push Run
+
+# on:
+#   schedule:
+#     - cron: 1 5 * * THU
+on: [push]
+
+# env:
+#     DEVOPS_DIR: devops
+
+jobs:
+  modify-json:
+    name: Update json file via Python
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check-out repo for use
+        uses: actions/checkout@v2
+        with:
+          repository: universallyleo/ngzkHandshakeScrape
+          # ref: my-branch
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          # path: ${{ env.DEVOPS_DIR }}
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9" # install the python version needed
+
+      - name: install python packages
+        run: pip install -r requirements.txt
+
+      - name: execute py script # run main.py
+        run: python gha_test.py
+
+      - name: Get current date
+        id: date
+        run: echo "today={$(date +'%Y-%m-%d')}" >> $GITHUB_ENV
+
+      - name: Auto commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Github Action auto update on ${{ env.today }}
