@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check-out repo for use
-        uses: actions/checkout@v2
-        with:
-          repository: universallyleo/ngzkHandshakeScrape
-          # ref: my-branch
-          # token: ${{ secrets.GITHUB_TOKEN }}
-          # path: ${{ env.DEVOPS_DIR }}
+        uses: actions/checkout@v3
+        # with:
+        #  repository: universallyleo/ngzkHandshakeScrape
+        # ref: my-branch
+        # token: ${{ secrets.GITHUB_TOKEN }}
+        # path: ${{ env.DEVOPS_DIR }}
 
       - name: setup python
         uses: actions/setup-python@v4
