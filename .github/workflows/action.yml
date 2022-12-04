@@ -1,4 +1,4 @@
-name: On Push Run
+name: On Push update JSON
 
 # on:
 #   schedule:
@@ -6,7 +6,7 @@ name: On Push Run
 on: [push]
 
 # env:
-#     DEVOPS_DIR: devops
+#     NAME: value
 
 jobs:
   modify-json:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Get current date
         id: date
-        run: echo "today={$(date +'%Y-%m-%d')}" >> $GITHUB_ENV
+        run: echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
 
       - name: Copy original json
         run: mv ./src/data.json ./src/data_${{ env.today }}.json
