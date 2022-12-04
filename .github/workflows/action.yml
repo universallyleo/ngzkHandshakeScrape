@@ -29,12 +29,15 @@ jobs:
       - name: install python packages
         run: pip install -r requirements.txt
 
-      - name: execute py script # run main.py
-        run: python gha_test.py
-
       - name: Get current date
         id: date
         run: echo "today={$(date +'%Y-%m-%d')}" >> $GITHUB_ENV
+
+      - name: Copy original json
+        run: mv ./src/data.json ./src/data_${{ env.today }}.json
+
+      - name: execute py script # run main.py
+        run: python gha_test.py data_${{ env.today }}.json
 
       - name: Auto commit
         uses: stefanzweifel/git-auto-commit-action@v4
